@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -6,10 +5,118 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>天使數字占卜卡</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;500&display=swap" rel="stylesheet">
-  <!-- ...略，實際會貼入完整 HTML ... -->
+  <style>
+    body {
+      font-family: 'Noto Sans TC', sans-serif;
+      background: linear-gradient(#f0e6ff, #fff);
+      padding: 2rem;
+      text-align: center;
+      color: #333;
+      transition: background-image 1s ease-in-out;
+    }
+    .card {
+      width: 90%;
+      max-width: 360px;
+      margin: 1rem auto;
+      padding: 1.5rem;
+      border-radius: 1.5rem;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+      background: #fffefc;
+      border: 1px solid #eee;
+    }
+    .number {
+      font-size: 2.8rem;
+      font-weight: 500;
+      color: #7b4397;
+    }
+    .title {
+      font-size: 1.5rem;
+      margin: 0.5rem 0;
+      font-weight: 500;
+    }
+    .message, .archangel, .question, .crystal, .scent {
+      margin: 0.75rem 0;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+    .scent {
+      font-weight: 500;
+      color: #6b4c9a;
+    }
+    button {
+      padding: 0.8rem 1.5rem;
+      margin-top: 1.5rem;
+      font-size: 1.1rem;
+      background: linear-gradient(45deg, #a18cd1, #fbc2eb);
+      color: white;
+      border: none;
+      border-radius: 2rem;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    button:hover {
+      background: linear-gradient(45deg, #cba3f3, #fdd9f9);
+    }
+    @media (max-width: 480px) {
+      .card {
+        padding: 1rem;
+      }
+      .number {
+        font-size: 2.2rem;
+      }
+    }
+  </style>
 </head>
 <body id="main-body" style="background-size: cover; background-position: center; background-repeat: no-repeat;">
   <h1>天使數字占卜卡</h1>
-  <!-- 內容省略，實際完整貼入 Canvas HTML -->
+  <div class="card" id="angel-card">
+    <div class="number" id="number">111</div>
+    <div class="title" id="title">意識覺醒</div>
+    <div class="message" id="message">你的想法正在快速顯化，保持正向思維。</div>
+    <div class="archangel" id="archangel"><strong>大天使：</strong>梅塔特隆</div>
+    <div class="question" id="question"><strong>靈性提問：</strong>我現在專注在什麼想法？它支持我嗎？</div>
+    <div class="crystal" id="crystal"><strong>水晶建議：</strong>紫水晶</div>
+    <div class="scent" id="scent"><strong>香氣配方：</strong>檸檬＋乳香</div>
+  </div>
+  <button onclick="drawCard()">點我抽今日天使指引</button>
+  <br/>
+  <button onclick="shareCard()">🔗 分享這張指引</button>
+
+  <script>
+    const cards = [
+      { number: "111", title: "意識覺醒", message: "你的想法正在快速顯化，保持正向思維。", archangel: "梅塔特隆 Metatron", question: "我現在需要聚焦於哪些念頭，才能創造我想要的實相？", crystal: "紫水晶、金髮晶", scent: "檸檬＋乳香" }
+    ];
+    const backgroundImages = {
+      "111": "https://images.unsplash.com/photo-1582034984651-65a773dc9b71?auto=format&fit=crop&w=1200&q=80"
+    };
+
+    function drawCard() {
+      const randomCard = cards[Math.floor(Math.random() * cards.length)];
+      document.getElementById("number").textContent = randomCard.number;
+      document.getElementById("title").textContent = randomCard.title;
+      document.getElementById("message").textContent = randomCard.message;
+      document.getElementById("archangel").innerHTML = "<strong>大天使：</strong>" + randomCard.archangel;
+      document.getElementById("question").innerHTML = "<strong>靈性提問：</strong>" + randomCard.question;
+      document.getElementById("crystal").innerHTML = "<strong>水晶建議：</strong>" + randomCard.crystal;
+      document.getElementById("scent").innerHTML = "<strong>香氣配方：</strong>" + randomCard.scent;
+
+      const bg = backgroundImages[randomCard.number];
+      if (bg) {
+        document.getElementById("main-body").style.backgroundImage = `url(${bg})`;
+      }
+    }
+
+    function shareCard() {
+      const number = document.getElementById("number").textContent;
+      const title = document.getElementById("title").textContent;
+      const message = document.getElementById("message").textContent;
+      const text = `💫 今日天使數字是 ${number}：${title}，\n${message}（點我抽牌👉 https://angel-oracle.netlify.app）`;
+      if (navigator.share) {
+        navigator.share({ title: '天使數字指引', text: text, url: window.location.href });
+      } else {
+        alert("目前瀏覽器不支援分享功能，請手動複製以下文字：\n" + text);
+      }
+    }
+  </script>
 </body>
 </html>
