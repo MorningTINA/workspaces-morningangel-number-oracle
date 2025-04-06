@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>天使數字占卜卡</title>
+  <style>
+    body {
+      font-family: "Arial", sans-serif;
+      background: linear-gradient(#f0e6ff, #fff);
+      padding: 2rem;
+      text-align: center;
+    }
+    .card {
+      width: 90%;
+      max-width: 340px;
+      margin: 1rem auto;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      background: white;
+    }
+    .number {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #8e44ad;
+    }
+    .title {
+      font-size: 1.25rem;
+      margin: 0.5rem 0;
+      color: #333;
+    }
+    .message, .archangel, .question, .crystal, .scent {
+      margin: 0.5rem 0;
+      line-height: 1.5;
+    }
+    button {
+      padding: 0.6rem 1.2rem;
+      margin-top: 1rem;
+      font-size: 1rem;
+      background: #8e44ad;
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+    }
+    @media (max-width: 480px) {
+      .card {
+        padding: 1rem;
+      }
+      .number {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>天使數字占卜卡</h1>
+  <div class="card" id="angel-card">
+    <div class="number" id="number">111</div>
+    <div class="title" id="title">意識覺醒</div>
+    <div class="message" id="message">你的想法正在快速顯化，保持正向思維。</div>
+    <div class="archangel" id="archangel"><strong>大天使：</strong>梅塔特隆</div>
+    <div class="question" id="question"><strong>靈性提問：</strong>我現在專注在什麼想法？它支持我嗎？</div>
+    <div class="crystal" id="crystal"><strong>水晶建議：</strong>紫水晶</div>
+    <div class="scent" id="scent"><strong>香氣配方：</strong>檸檬＋乳香</div>
+  </div>
+  <button onclick="drawCard()">抽一張卡</button>
+
+  <script>
+    const cards = [
+      { number: "111", title: "意識覺醒", message: "你的想法正在快速顯化，保持正向思維。", archangel: "梅塔特隆", question: "我現在專注在什麼想法？它支持我嗎？", crystal: "紫水晶", scent: "檸檬＋乳香" }
+    ];
+    function drawCard() {
+      const randomCard = cards[Math.floor(Math.random() * cards.length)];
+      document.getElementById("number").textContent = randomCard.number;
+      document.getElementById("title").textContent = randomCard.title;
+      document.getElementById("message").textContent = randomCard.message;
+      document.getElementById("archangel").innerHTML = "<strong>大天使：</strong>" + randomCard.archangel;
+      document.getElementById("question").innerHTML = "<strong>靈性提問：</strong>" + randomCard.question;
+      document.getElementById("crystal").innerHTML = "<strong>水晶建議：</strong>" + randomCard.crystal;
+      document.getElementById("scent").innerHTML = "<strong>香氣配方：</strong>" + randomCard.scent;
+    }
+  </script>
+</body>
+</html>
